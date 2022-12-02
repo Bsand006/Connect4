@@ -1,15 +1,13 @@
 package com.briansand.connect4;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 
 public class Gui {
 
@@ -34,10 +32,11 @@ public class Gui {
 			for (int j = 0; j < 6; j++) {
 
 				cells[i][j] = new JLabel();
+				cells[i][j].setSize(150,150);
 				gbc.gridx = i;
 				gbc.gridy = j;
 				gbc.ipadx = 50;
-				gbc.ipady = 20;
+				gbc.ipady = 50;
 
 				cells[i][j].setText("-");
 				
