@@ -37,7 +37,7 @@ public class Gui {
         
         p = new JPanel();
         p.setLayout(new GridBagLayout());
-        p.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+        p.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
 
@@ -51,7 +51,7 @@ public class Gui {
 
                 cells[i][j] = new JLabel(whiteIcon);
                 cells[i][j].setSize(50, 50);
-                cells[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+                cells[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
                 cells[i][j].addMouseListener(l); // set Logic as mouse listener for the cell
                
                 // cells[i][j].setText("-");
