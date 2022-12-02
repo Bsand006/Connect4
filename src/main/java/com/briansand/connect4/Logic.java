@@ -6,7 +6,10 @@ import java.awt.event.MouseListener;
 public class Logic implements MouseListener {
 	Gui g;
 
-	int turn = 1;
+	static final boolean PLAYER_RED = false;
+    static final boolean PLAYER_BLUE = true;
+
+    boolean player = PLAYER_RED;
 	int turnCounter = 0;
 
 	public Logic(Gui g) {
@@ -20,7 +23,13 @@ public class Logic implements MouseListener {
 			for (int j = 0; j < 6; j++) {
 
 				if (e.getSource() == g.cells[i][j]) {
-				    g.cells[i][j].setIcon(g.redIcon);
+				    if (player == PLAYER_RED)
+				        g.cells[i][j].setIcon(g.redIcon);
+				    else
+                        g.cells[i][j].setIcon(g.blueIcon);
+
+				    // Switch!
+				    player = !player;
 				}
 			}
 		}
