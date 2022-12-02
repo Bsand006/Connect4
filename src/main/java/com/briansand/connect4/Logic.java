@@ -9,7 +9,7 @@ public class Logic implements MouseListener {
 	int turn = 1;
 	int turnCounter = 0;
 
-	public Logic() {
+	public Logic(Gui g) {
 		this.g = g;
 	}
 
@@ -20,7 +20,7 @@ public class Logic implements MouseListener {
 			for (int j = 0; j < 6; j++) {
 
 				if (e.getSource() == g.cells[i][j]) {
-
+				    g.cells[i][j].setIcon(g.redIcon);
 				}
 			}
 		}
@@ -41,5 +41,4 @@ public class Logic implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 
 	}
-
 }
