@@ -3,7 +3,8 @@ package com.briansand.connect4;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-//import javax.swing.PopupFactory;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 public class Logic implements MouseListener {
 	Gui g;
@@ -20,9 +21,11 @@ public class Logic implements MouseListener {
 	 */
 
 	int cellState[][] = new int[7][6]; // Array to track cell values
-	int turnCounter = 0; // Integer to track how many turns have happened
+	int turnCounter = 0; // Integer to track how many turns have passed. Used to identify a draw
 	int turn = 1; // Integer to track the current turn
 	int val; // Win check value
+
+	JDialog d; // Popup box to display win message
 
 	// Allows Gui variables to be called with "g"
 	public Logic(Gui g) {
@@ -30,7 +33,6 @@ public class Logic implements MouseListener {
 	}
 
 	// mouse Clicked method
-	@Override
 	public void mouseClicked(MouseEvent e) {
 
 		for (int i = 0; i < 7; i++) {
@@ -40,6 +42,12 @@ public class Logic implements MouseListener {
 
 					if (cellState[i][j] != 0) // Prevents clicking on cells already filled
 						continue;
+
+					/*
+					 * Program loops through each row to ensure a circle is placed at the lowest
+					 * open cell. When a cell is placed turnCounter increases by one and a 1 or 2 is
+					 * added to the cellState array.
+					 */
 
 					if (cellState[i][5] == 0) {
 						turnCounter += 1;
@@ -109,24 +117,39 @@ public class Logic implements MouseListener {
 							turn = 1;
 						}
 					}
-					winLogic();
+					winLogic(); // Runs method winLogic
+
 				}
 
-				int winner = winLogic();
+				int winner = winLogic(); // Integer winner equals returned value of winLogic
 
-				if (winner == 1) {
-					System.out.println("Player 1 wins!");
+				// Creates JDialog popup box
+				d = new JDialog(g.f, "Win message", true);
+				d.setBounds(300, 100, 300, 100);
+
+				// If player red wins
+				if (winner == 1) { 
+					d.add(new JLabel("Player 1 wins!"));
+					d.setVisible(true);
+					System.exit(0);
+				
+					// If player blue wins
 				} else if (winner == 2) {
-					System.out.println("Player 2 wins!");
+					d.add(new JLabel("Player 2 wins!"));
+					d.setVisible(true);
+					System.exit(0);
+				
+					// If draw
 				} else if (turnCounter == 42) {
-					System.out.println("Draw!");
+					d.add(new JLabel("Draw!"));
+					d.setVisible(true);
+					System.exit(0);
 				}
-
 			}
 		}
 	}
 
-	// Win checker method. Returns 1 when a win is detected.
+	// Win checker method. Returns a 1 or 2 when a win is detected.
 	public int winLogic() {
 
 		for (int i = 0; i < 7; i++) {
