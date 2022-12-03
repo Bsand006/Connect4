@@ -15,67 +15,86 @@ import javax.swing.SwingUtilities;
 
 public class Gui {
 
-    JFrame f;
-    JPanel p;
-    JLabel cells[][];
+	/*
+	 * This class creates the graphic user interface for the game. The game uses
+	 * images of red and blue circles as the tokens for the game. The grid for the
+	 * game is created using an array of JLabels and uses GridBagLayout to organize
+	 * them. For loops are used to loop through all the cells and add the proper
+	 * code to them all at once. All the logic for the game is in the other class
+	 * Logic.
+	 */
 
-    GridBagConstraints gbc;
+	// GUI variables
 
-    ImageIcon redIcon, whiteIcon, blueIcon;
+	JFrame f;
+	JPanel p;
+	JLabel cells[][];
 
-    void run() throws IOException {
-        Logic l = new Logic(this);
+	GridBagConstraints gbc;
 
-        redIcon = new ImageIcon(ImageIO.read(getClass().getResource("/red.png")));
-        whiteIcon = new ImageIcon(ImageIO.read(getClass().getResource("/white.png")));
-        blueIcon = new ImageIcon(ImageIO.read(getClass().getResource("/blue.png")));
+	ImageIcon redIcon, whiteIcon, blueIcon;
 
-        f = new JFrame();
-        f.setTitle("Connect 4");
-        f.setSize(650, 450);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // close when we click the x button
-        
-        p = new JPanel();
-        p.setLayout(new GridBagLayout());
-        p.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
-        gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH;
+	// Creates GUI
+	void run() throws IOException {
+		Logic l = new Logic(this);
 
-        cells = new JLabel[7][6];
+		// Red and blue image circles for the game tokens. The white Icon is used to
+		// properly size the cells
+		redIcon = new ImageIcon(ImageIO.read(getClass().getResource("/red.png")));
+		whiteIcon = new ImageIcon(ImageIO.read(getClass().getResource("/white.png")));
+		blueIcon = new ImageIcon(ImageIO.read(getClass().getResource("/blue.png")));
 
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 6; j++) {
-                // Update the GBC to the current cell
-                gbc.gridx = i;
-                gbc.gridy = j;
+		// Sets up the JFrame
+		f = new JFrame();
+		f.setTitle("Connect 4");
+		f.setSize(650, 450);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                cells[i][j] = new JLabel(whiteIcon);
-                cells[i][j].setSize(50, 50);
-                cells[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-                cells[i][j].addMouseListener(l); // set Logic as mouse listener for the cell
-               
-                // cells[i][j].setText("-");
+		// JPanel and GridBagLayout setup
+		p = new JPanel();
+		p.setLayout(new GridBagLayout());
+		p.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
 
-                p.add(cells[i][j], gbc);
+		cells = new JLabel[7][6];
 
-            }
-        }
+		// For loops to loop through all the cells
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 6; j++) {
 
-        f.getContentPane().add(p);
-        f.setVisible(true);
-    }
+				// Sets up the cells using GridBagConstraints and adds mouseListener to cells
 
-    public static void main(String[] args) {
+				gbc.gridx = i;																															
+				gbc.gridy = j;
 
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Gui().run();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+				cells[i][j] = new JLabel(whiteIcon);
+				cells[i][j].setSize(50, 50);
+				cells[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+				cells[i][j].addMouseListener(l);
+
+				p.add(cells[i][j], gbc);
+
+			}
+		}
+
+		// Adds components to frame and makes frame visible
+		f.getContentPane().add(p);
+		f.setVisible(true);
+	}
+
+	// Launches GUI
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			public void run() {
+				try {
+					new Gui().run();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 }
