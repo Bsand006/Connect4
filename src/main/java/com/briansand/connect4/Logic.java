@@ -115,7 +115,11 @@ public class Logic implements MouseListener {
 				int winner = winLogic();
 
 				if (winner == 1) {
-					 System.out.println("Yes!");
+					System.out.println("Player 1 wins!");
+				} else if (winner == 2) {
+					System.out.println("Player 2 wins!");
+				} else if (turnCounter == 42) {
+					System.out.println("Draw!");
 				}
 
 			}
@@ -128,14 +132,47 @@ public class Logic implements MouseListener {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 6; j++) {
 
-				val = cellState[i][j];
-				
-				if (i < 4)
-					if (cellState[i + 1][j] == val)
-						if (cellState[i + 2][j] == val)
-							if (cellState[i + 3][j] == val)
-								return 1;
+				val = cellState[i][j]; // Sets cell state to the integer val
 
+				if (val != 0) { //
+
+					if (i < 4)
+						if (cellState[i + 1][j] == val)
+							if (cellState[i + 2][j] == val)
+								if (cellState[i + 3][j] == val)
+									if (val == 1) {
+										return 1;
+									} else
+										return 2;
+
+					if (j < 3)
+						if (cellState[i][j + 1] == val)
+							if (cellState[i][j + 2] == val)
+								if (cellState[i][j + 3] == val)
+									if (val == 1) {
+										return 1;
+									} else
+										return 2;
+
+					if (i < 4 && j < 3)
+						if (cellState[i + 1][j + 1] == val)
+							if (cellState[i + 2][j + 2] == val)
+								if (cellState[i + 3][j + 3] == val)
+									if (val == 1) {
+										return 1;
+									} else
+										return 2;
+
+					if (i < 4 && j > 3)
+						if (cellState[i + 1][j - 1] == val)
+							if (cellState[i + 2][j - 2] == val)
+								if (cellState[i + 3][j = 3] == val)
+									if (val == 1) {
+										return 1;
+									} else
+										return 2;
+
+				}
 			}
 		}
 
