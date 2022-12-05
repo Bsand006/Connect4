@@ -186,10 +186,10 @@ public class Logic implements MouseListener {
 									} else
 										return 2;
 
-					if (i < 4 && j > 3)
+					if (i < 4 && j >= 3)
 						if (cellState[i + 1][j - 1] == val)
 							if (cellState[i + 2][j - 2] == val)
-								if (cellState[i + 3][j = 3] == val)
+								if (cellState[i + 3][j - 3] == val)
 									if (val == 1) {
 										return 1;
 									} else
