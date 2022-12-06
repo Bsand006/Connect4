@@ -157,9 +157,9 @@ public class Logic implements MouseListener {
 
 				val = cellState[i][j]; // Sets cell state to the integer val
 
-				if (val != 0) { //
+				if (val != 0) { // Checks only if cell has a value 
 
-					if (i < 4)
+					if (i < 4) // Horizontal win check
 						if (cellState[i + 1][j] == val)
 							if (cellState[i + 2][j] == val)
 								if (cellState[i + 3][j] == val)
@@ -168,7 +168,7 @@ public class Logic implements MouseListener {
 									} else
 										return 2;
 
-					if (j < 3)
+					if (j < 3) // Vertical win check
 						if (cellState[i][j + 1] == val)
 							if (cellState[i][j + 2] == val)
 								if (cellState[i][j + 3] == val)
@@ -177,7 +177,7 @@ public class Logic implements MouseListener {
 									} else
 										return 2;
 
-					if (i < 4 && j < 3)
+					if (i < 4 && j < 3) // Upwards diagnal win check
 						if (cellState[i + 1][j + 1] == val)
 							if (cellState[i + 2][j + 2] == val)
 								if (cellState[i + 3][j + 3] == val)
@@ -186,7 +186,7 @@ public class Logic implements MouseListener {
 									} else
 										return 2;
 
-					if (i < 4 && j >= 3)
+					if (i < 4 && j >= 3) // Downwards diagnal win check
 						if (cellState[i + 1][j - 1] == val)
 							if (cellState[i + 2][j - 2] == val)
 								if (cellState[i + 3][j - 3] == val)
